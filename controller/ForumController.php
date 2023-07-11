@@ -1,16 +1,18 @@
 <?php
 
-    namespace Controller;
+namespace Controller;
 
-    use App\Session;
-    use App\AbstractController;
-    use App\ControllerInterface;
-    use Model\Managers\TopicManager;
-    use Model\Managers\CategoryManager;
+use App\Session;
+use App\AbstractController;
+use App\ControllerInterface;
+use Model\Managers\TopicManager;
+use Model\Managers\CategoryManager;
+
+class ForumController extends AbstractController implements ControllerInterface{
     
-    class ForumController extends AbstractController implements ControllerInterface{
-
-        public function index(){
+    
+    public function index(){
+           // var_dump("ok");die;
           
 
            $topicManager = new TopicManager();
@@ -20,10 +22,9 @@
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
                     "topics" => $topicManager->findAll(["creationdate", "DESC"]),
-                    "category" => $categoryManager->findAll(['Tittle', "ASC"])
-                ]
-            ];
-        
+                    "categorys" => $categoryManager->findAll(['title', "ASC"])
+                    ]
+                ];
         }
 
         
