@@ -21,7 +21,10 @@ SET time_zone = "+00:00";
 -- Base de données : `forum_dwwm3`
 --
 
--- --------------------------------------------------------
+-- 
+-- Listage de la structure de la base pour forum_dwwm3
+CREATE DATABASE IF NOT EXISTS `forum_dwwm3` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_bin */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `forum_dwwm3`;
 
 --
 -- Structure de la table `Categorie`
