@@ -7,6 +7,7 @@ use App\AbstractController;
 use App\ControllerInterface;
 use Model\Managers\TopicManager;
 use Model\Managers\CategoryManager;
+use Model\Managers\PostManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
     
@@ -58,6 +59,22 @@ class ForumController extends AbstractController implements ControllerInterface{
                      ]
                  ];
          }
+         public function listPosts(){
+            //var_dump("ok");die;
+            
+  
+              $postManager = new postManager();
+  
+              //var_dump($postManager->findAll(['title', "ASC"])->current());die;
+           
+              return [
+                  "view" => VIEW_DIR."forum/listPosts.php",
+                  "data" => [
+               
+                      "posts" => $postManager->findAll(['topic_id', "DESC"])
+                      ]
+                  ];
+          }
  
         
 
