@@ -11,11 +11,17 @@
      * @method static select() requètes de sélection
      */
     abstract class DAO{
-
-        private static $host   = 'mysql:host=127.0.0.1;port=8889';
-        private static $dbname = 'forum_dwwm3';
+        // heidiSql
+        private static $host   = 'mysql:host=127.0.0.1;port=3306';
+        private static $dbname = 'forum';
         private static $dbuser = 'root';
-        private static $dbpass = 'root';
+        private static $dbpass = '';
+
+        // php myAdmin
+        // private static $host   = 'mysql:host=127.0.0.1;port=8889';
+        // private static $dbname = 'forum';
+        // private static $dbuser = 'root';
+        // private static $dbpass = 'root';
 
         private static $bdd;
 
