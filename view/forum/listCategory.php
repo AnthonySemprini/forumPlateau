@@ -4,7 +4,7 @@ $categorys = $result["data"]['categorys'];
     
 ?>
 
-<h1>liste categorys</h1>
+<h1>Liste categorie</h1>
 
 <?php
 foreach($categorys as $category ){
@@ -14,5 +14,5 @@ foreach($categorys as $category ){
     <?php
 }
 
-
+var_dump($category);die;
   

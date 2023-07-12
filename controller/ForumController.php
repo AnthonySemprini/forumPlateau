@@ -21,7 +21,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
-                    "topics" => $topicManager->findAll(["creationdate", "DESC"]),
+                    "topics" => $topicManager->findAll(["dateCrea", "DESC"]),
                     "categorys" => $categoryManager->findAll(['title', "ASC"])
                     ]
                 ];

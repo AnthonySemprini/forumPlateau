@@ -7,7 +7,7 @@
 
         private $id;
         private $text;
-        private $creationDate;
+        private $dateCrea;
         private $topic;
         private $user;
     
@@ -53,13 +53,13 @@
 
                 return $this;
         }
-        public function getCreationDate(){
-            $formattedDate = $this->creationDate->format("d/m/Y, H:i:s");
+        public function getdateCrea(){
+            $formattedDate = $this->dateCrea->format("d/m/Y, H:i:s");
             return $formattedDate;
         }
 
-        public function setCreationDate($date){
-            $this->creationDate = new \DateTime($date);
+        public function setdateCrea($date){
+            $this->dateCrea = new \DateTime($date);
             return $this;
         }
         /**
