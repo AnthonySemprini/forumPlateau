@@ -14,5 +14,5 @@ foreach($categorys as $category ){
     <?php
 }
 
-var_dump($category);die;
+//var_dump($category);die;
   
