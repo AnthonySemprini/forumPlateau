@@ -18,28 +18,28 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `forum_dwwm3`
+-- Base de données : `forum`
 --
 
 -- 
--- Listage de la structure de la base pour forum_dwwm3
-CREATE DATABASE IF NOT EXISTS `forum_dwwm3` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_bin */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `forum_dwwm3`;
+-- Listage de la structure de la base pour forum
+CREATE DATABASE IF NOT EXISTS `forum` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_bin */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `forum`;
 
 --
--- Structure de la table `Categorie`
+-- Structure de la table `category`
 --
 
-CREATE TABLE `Categorie` (
+CREATE TABLE `category` (
   `id_category` int(11) NOT NULL,
-  `Title` varchar(100) NOT NULL
+  `title` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Categorie`
+-- Déchargement des données de la table `category`
 --
 
-INSERT INTO `Categorie` (`id_category`, `Title`) VALUES
+INSERT INTO `category` (`id_category`, `title`) VALUES
 (1, 'Cinema'),
 (2, 'Manga'),
 (3, 'Actu'),
@@ -50,13 +50,13 @@ INSERT INTO `Categorie` (`id_category`, `Title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Post`
+-- Structure de la table `post`
 --
 
-CREATE TABLE `Post` (
+CREATE TABLE `post` (
   `id_post` int(11) NOT NULL,
-  `Text` text NOT NULL,
-  `DateCrea` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `text` text NOT NULL,
+  `dateCrea` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_topic` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -64,23 +64,23 @@ CREATE TABLE `Post` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Topics`
+-- Structure de la table `topic`
 --
 
-CREATE TABLE `Topics` (
+CREATE TABLE `topic` (
   `id_topic` int(11) NOT NULL,
-  `TitleTopic` varchar(50) NOT NULL,
-  `DateCrea` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Locked` tinyint(1) NOT NULL,
-  `Id_category` int(11) NOT NULL,
+  `titletopic` varchar(50) NOT NULL,
+  `dateCrea` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `locked` tinyint(1) NOT NULL,
+  `id_category` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `Topics`
+-- Déchargement des données de la table `topic`
 --
 
-INSERT INTO `Topics` (`id_topic`, `TitleTopic`, `DateCrea`, `Locked`, `Id_category`, `id_user`) VALUES
+INSERT INTO `topic` (`id_topic`, `titletopic`, `dateCrea`, `locked`, `id_category`, `id_user`) VALUES
 (1, 'Batman ', '2023-07-11 14:47:32', 1, 1, 1),
 (2, 'Racing club de strasbourg', '2023-07-11 14:48:52', 1, 6, 2),
 (3, 'La meteo de demain', '2023-07-11 14:48:52', 1, 3, 3);
@@ -88,23 +88,23 @@ INSERT INTO `Topics` (`id_topic`, `TitleTopic`, `DateCrea`, `Locked`, `Id_catego
 -- --------------------------------------------------------
 
 --
--- Structure de la table `User`
+-- Structure de la table `user`
 --
 
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `Pseudo` varchar(50) NOT NULL,
-  `Pasword` varchar(255) NOT NULL,
-  `DateRegistration` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Email` varchar(255) NOT NULL,
-  `Role` varchar(50) NOT NULL
+  `pseudo` varchar(50) NOT NULL,
+  `pasword` varchar(255) NOT NULL,
+  `dateRegistration` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `email` varchar(255) NOT NULL,
+  `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `User`
+-- Déchargement des données de la table `user`
 --
 
-INSERT INTO `User` (`id_user`, `Pseudo`, `Pasword`, `DateRegistration`, `Email`, `Role`) VALUES
+INSERT INTO `user` (`id_user`, `pseudo`, `pasword`, `dateRegistration`, `email`, `role`) VALUES
 (1, 'lulu24', 'azerty', '2023-07-11 14:44:48', 'azerty@mail.fr', 'membre'),
 (2, 'antho67', 'azerty', '2023-07-11 14:46:12', 'azerty@mail.fr', 'admin'),
 (3, 'nico177', 'azerty', '2023-07-11 14:46:12', 'azerty@mail.com', 'membre');
@@ -114,31 +114,31 @@ INSERT INTO `User` (`id_user`, `Pseudo`, `Pasword`, `DateRegistration`, `Email`,
 --
 
 --
--- Index pour la table `Categorie`
+-- Index pour la table `category`
 --
-ALTER TABLE `Categorie`
+ALTER TABLE `category`
   ADD PRIMARY KEY (`id_category`);
 
 --
--- Index pour la table `Post`
+-- Index pour la table `post`
 --
-ALTER TABLE `Post`
+ALTER TABLE `post`
   ADD PRIMARY KEY (`id_post`),
   ADD KEY `fk_topic` (`id_topic`),
-  ADD KEY `fk_userPost` (`id_user`);
+  ADD KEY `fk_userpost` (`id_user`);
 
 --
--- Index pour la table `Topics`
+-- Index pour la table `topic`
 --
-ALTER TABLE `Topics`
+ALTER TABLE `topic`
   ADD PRIMARY KEY (`id_topic`),
   ADD KEY `fk_user` (`id_user`),
-  ADD KEY `fk_category` (`Id_category`) USING BTREE;
+  ADD KEY `fk_category` (`id_category`) USING BTREE;
 
 --
--- Index pour la table `User`
+-- Index pour la table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
@@ -146,27 +146,27 @@ ALTER TABLE `User`
 --
 
 --
--- AUTO_INCREMENT pour la table `Categorie`
+-- AUTO_INCREMENT pour la table `category`
 --
-ALTER TABLE `Categorie`
+ALTER TABLE `category`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pour la table `Post`
+-- AUTO_INCREMENT pour la table `post`
 --
-ALTER TABLE `Post`
+ALTER TABLE `post`
   MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `Topics`
+-- AUTO_INCREMENT pour la table `topic`
 --
-ALTER TABLE `Topics`
+ALTER TABLE `topic`
   MODIFY `id_topic` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `User`
+-- AUTO_INCREMENT pour la table `user`
 --
-ALTER TABLE `User`
+ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -174,18 +174,18 @@ ALTER TABLE `User`
 --
 
 --
--- Contraintes pour la table `Post`
+-- Contraintes pour la table `post`
 --
-ALTER TABLE `Post`
-  ADD CONSTRAINT `fk_topic` FOREIGN KEY (`id_topic`) REFERENCES `Topics` (`id_topic`),
-  ADD CONSTRAINT `fk_userPost` FOREIGN KEY (`id_user`) REFERENCES `User` (`id_user`);
+ALTER TABLE `post`
+  ADD CONSTRAINT `fk_topic` FOREIGN KEY (`id_topic`) REFERENCES `topic` (`id_topic`),
+  ADD CONSTRAINT `fk_userpost` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 
 --
--- Contraintes pour la table `Topics`
+-- Contraintes pour la table `topic`
 --
-ALTER TABLE `Topics`
-  ADD CONSTRAINT `fk_category` FOREIGN KEY (`Id_category`) REFERENCES `Categorie` (`id_category`),
-  ADD CONSTRAINT `fk_user` FOREIGN KEY (`id_user`) REFERENCES `User` (`id_user`);
+ALTER TABLE `topic`
+  ADD CONSTRAINT `fk_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id_category`),
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
