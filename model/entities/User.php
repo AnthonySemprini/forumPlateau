@@ -3,7 +3,7 @@
 
     use App\Entity;
 
-    final class Post extends Entity{
+    final class User extends Entity{
         
         private $id;
         private $pseudo;

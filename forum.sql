@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 -- Listage de la structure de table forum. topic
 CREATE TABLE IF NOT EXISTS `topic` (
   `id_topic` int NOT NULL,
-  `titleTopic` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
   `dateCrea` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `locked` tinyint(1) NOT NULL,
   `id_category` int NOT NULL,

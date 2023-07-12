@@ -13,6 +13,5 @@ foreach($categorys as $category ){
     <p><?=$category->getTitle()?></p>
     <?php
 }
-
-//var_dump($category);die;
+//var_dump($categorys);die;
   

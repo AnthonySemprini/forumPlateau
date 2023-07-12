@@ -8,7 +8,8 @@
         private $id;
         private $title;
         private $dateCrea;
-        private $closed;
+        private $locked;
+        private $category;
         private $user;
         
 
@@ -87,21 +88,40 @@
         }
 
         /**
-         * Get the value of closed
+         * Get the value of locked
          */ 
-        public function getClosed()
+        public function getlocked()
         {
-                return $this->closed;
+                return $this->locked;
         }
 
         /**
-         * Set the value of closed
+         * Set the value of locked
          *
          * @return  self
          */ 
-        public function setClosed($closed)
+        public function setlocked($locked)
         {
-                $this->closed = $closed;
+                $this->locked = $locked;
+
+                return $this;
+        }
+        /**
+         * Get the value of category
+         */ 
+        public function getCategory()
+        {
+                return $this->category;
+        }
+
+        /**
+         * Set the value of category
+         *
+         * @return  self
+         */ 
+        public function setCategory($category)
+        {
+                $this->category = $category;
 
                 return $this;
         }

@@ -20,7 +20,7 @@ class ForumController extends AbstractController implements ControllerInterface{
          return [
              "view" => VIEW_DIR."forum/listTopics.php",
              "data" => [
-                 "topics" => $topicManager->findAll(["creationdate", "DESC"]),
+                 "topics" => $topicManager->findAll(["dateCrea", "DESC"]),
                  "categorys" => $categoryManager->findAll(['title', "ASC"])
                  ]
              ];
@@ -42,7 +42,23 @@ class ForumController extends AbstractController implements ControllerInterface{
                     ]
                 ];
         }
-
+        public function listTopic(){
+           //var_dump("ok");die;
+           
+ 
+             $topicManager = new TopicManager();
+ 
+             //var_dump($topicManager->findAll(['title', "ASC"])->current());die;
+ 
+             return [
+                 "view" => VIEW_DIR."forum/listTopic.php",
+                 "data" => [
+              
+                     "topics" => $topicManager->findAll(['title', "ASC"])
+                     ]
+                 ];
+         }
+ 
         
 
     }
