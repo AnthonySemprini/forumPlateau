@@ -16,4 +16,8 @@ foreach($posts as $post ){
 
   echo "Post vide";
 }
-//var_dump($posts);die;
+?>
+<form action="">
+  <input type="text" >
+<button>Ecrire un post</button>
+</form>

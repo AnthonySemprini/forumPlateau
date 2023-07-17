@@ -22,6 +22,8 @@ foreach($topics as $topic ){
 
     echo "Cette categorie est vide";
 }
-
-
-  
+?>
+<form action="">
+  <input type="text">
+<button>Crée un topic</button>
+</form> 
