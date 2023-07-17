@@ -10,7 +10,8 @@ $categorys = $result["data"]['categorys'];
 foreach($categorys as $category ){
    // var_dump($category->getId());die;
     ?>
-    <a href="index.php?ctrl=forum&action=listTopics&id=<?=$category->getId() ;?>"><p><?=$category->getTitle()?></p></a>
+    <a href="index.php?ctrl=forum&action=listTopics&id=<?=$category->getId() ;?>">
+    <p><?=$category->getTitle()?></p></a>
     <?php
 }
 ?>

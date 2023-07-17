@@ -77,7 +77,7 @@
                 return $this;
         }
 
-        public function getdateCrea(){
+        public function getDateCrea(){
             $formattedDate = $this->dateCrea->format("d/m/Y, H:i:s");
             return $formattedDate;
         }

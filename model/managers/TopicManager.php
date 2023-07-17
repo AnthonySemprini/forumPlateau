@@ -19,7 +19,7 @@
 
 
                  //requet sql
-            $sql = "SELECT *                       
+            $sql = "SELECT *                  
                     FROM ".$this->tableName." t
                     WHERE category_id = :id"; 
                     

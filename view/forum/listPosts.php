@@ -14,6 +14,6 @@ foreach($posts as $post ){
 }
 }else{
 
-  echo "Vide";
+  echo "Post vide";
 }
 //var_dump($posts);die;
