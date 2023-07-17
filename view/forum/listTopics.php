@@ -13,7 +13,7 @@ foreach($topics as $topic ){
         
         ?>
     <a href="index.php?ctrl=forum&action=listPosts&id=<?=$topic->getId() ;?>">
-    <p><?=$topic->getTitle()."</a>   ".$topic->getDateCrea()." ".$topic->getUser() ?></p>
+    <p><?=$topic->getTitle()."</a><br>Crée par ".$topic->getUser()."<br> Date :".$topic->getDateCrea() ?></p>
     <?php
 
 

@@ -9,7 +9,7 @@ if(isset($posts)){
 <?php
 foreach($posts as $post ){
     ?>
-  <p><?=$post->gettext()?></p>
+  <p><?=$post->gettext()."<br>Poster par : ".$post->getUser()."<br>Date : ".$post->getDateCrea()?></p>
     <?php
 }
 }else{
