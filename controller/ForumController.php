@@ -13,18 +13,8 @@ class ForumController extends AbstractController implements ControllerInterface{
     
     public function index(){
         // var_dump("ok");die;
-       
-
-        $topicManager = new TopicManager();
-         $categoryManager = new CategoryManager();
-
-         return [
-             "view" => VIEW_DIR."forum/listTopics.php",
-             "data" => [
-                 "topics" => $topicManager->findAll(["dateCrea", "DESC"]),
-                 "categorys" => $categoryManager->findAll(['title', "ASC"])
-                 ]
-             ];
+      
+      
      }
 
     public function listCategory(){
@@ -43,27 +33,29 @@ class ForumController extends AbstractController implements ControllerInterface{
                     ]
                 ];
         }
-        public function listTopics(){
-           //var_dump("ok");die;
-           
- 
-             $topicManager = new TopicManager();
- 
-             //var_dump($topicManager->findAll(['title', "ASC"])->current());die;
-          
-             return [
-                 "view" => VIEW_DIR."forum/listTopics.php",
-                 "data" => [
-              
-                     "topics" => $topicManager->findAll(['category_id', "DESC"])
-                     ]
-                 ];
-         }
+        
+         
+       public function listTopics($id){
+            //var_dump("ok");die;
+            
+  
+            $topicManager = new TopicManager();
+  
+              //var_dump($topicManager->findAll(['title', "ASC"])->current());die;
+        
+                return [
+                "view" => VIEW_DIR."forum/listTopics.php",
+                "data" => [
+               
+                   "topics" => $topicManager->findTopicByCategory($id)
+                    ]];
+          }
+
          public function listPosts(){
             //var_dump("ok");die;
             
   
-              $postManager = new postManager();
+              $postManager = new PostManager();
   
               //var_dump($postManager->findAll(['title', "ASC"])->current());die;
            
