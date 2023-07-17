@@ -51,7 +51,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                     ]];
           }
 
-         public function listPosts(){
+         public function listPosts($id){
             //var_dump("ok");die;
             
   
@@ -63,7 +63,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                   "view" => VIEW_DIR."forum/listPosts.php",
                   "data" => [
                
-                      "posts" => $postManager->findAll(['topic_id', "DESC"])
+                      "posts" => $postManager->findPostByTopics($id)
                       ]
                   ];
           }

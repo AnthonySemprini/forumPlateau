@@ -1,7 +1,7 @@
 <?php
 
 $posts = $result["data"]['posts'];
-    
+if(isset($posts)){   
 ?>
 
 <h1>Liste des posts</h1>
@@ -11,5 +11,9 @@ foreach($posts as $post ){
     ?>
   <p><?=$post->gettext()?></p>
     <?php
+}
+}else{
+
+  echo "Vide";
 }
 //var_dump($posts);die;
