@@ -29,9 +29,9 @@
             );
         }
 
-        public function addTopic($id){ //fonction permettant d'ajoute un topic
+        public function addTopic($id){ 
 
-            $sql = "INSERT INTO ".$this->tableName." t
-                    VALUES (:title, :category_id)"; 
+            $sql = "INSERT INTO ".$this->tableName." (title, category_id, user_id)
+                    VALUES (:title, :category_id, 1)"; 
     }
 }

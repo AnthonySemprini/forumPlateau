@@ -41,19 +41,31 @@ class ForumController extends AbstractController implements ControllerInterface{
   
             $topicManager = new TopicManager();
             //$categoryManager = new CategoryManager();
-           
-
-  
+            
+            
+            
               //var_dump($topicManager->findAll(['title', "ASC"])->current());die;
-        
+              
                 return [
-                "view" => VIEW_DIR."forum/listTopics.php",
+                    "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
-               
+                    
                    "topics" => $topicManager->findTopicByCategory($id),
                    //"categorys" => $categoryManager->findAll(['title', "ASC"])
-                    ]];
-          }
+                   ]];
+                }
+                
+                public function ajoutTopic($id){ 
+                    
+                    $topicManager = new TopicManager();
+                    
+           return[
+            "view" => VIEW_DIR."forum/listTopics.php",
+            "data" => [
+
+                "topics" => $topicManager->addTopic($id)
+           ]];
+    }
 
         
 

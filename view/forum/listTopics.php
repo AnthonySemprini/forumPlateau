@@ -26,7 +26,7 @@ foreach($topics as $topic ){
 ?>
 
 
-<form action="index.php?action=">
+<form method="POST" action="index.php?action=">
   <p>Titre</p>
   <input type="text" name="title">
   <br>
