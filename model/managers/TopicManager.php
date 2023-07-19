@@ -28,4 +28,10 @@
                 $this->className
             );
         }
+
+        public function addTopic($id){ //fonction permettant d'ajoute un topic
+
+            $sql = "INSERT INTO ".$this->tableName." t
+                    VALUES (:title, :category_id)"; 
     }
+}

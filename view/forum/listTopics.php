@@ -1,7 +1,7 @@
 <?php
 
 $topics = $result["data"]['topics'];
-$categorys = $result["data"]['categorys'];
+//$categorys = $result["data"]['categorys'];
 //var_dump($topics);die;
   if(isset($topics)){
 ?>
@@ -24,20 +24,27 @@ foreach($topics as $topic ){
     echo "Cette categorie est vide";
 }
 ?>
-<form action="">
-  
-  <input type="text" >
+
+
+<form action="index.php?action=">
+  <p>Titre</p>
+  <input type="text" name="title">
   <br>
-  <select name="selectCategory" id="">
-    <option value="">Selectionner la categorie... </option>
-    <?php
-    //var_dump($categorys);die;
-      foreach($categorys as $category){
-        ?>
-        <option value="<?= $category->getId()?>"><?= $category->getTitle()?></option>
-        <?php
-      }
-      ?>
-  </select>
-<button>Envoyer</button>
+  <p>Premier post</p>
+  <input type="text" name="firstPost">
+  <br>
+  <br>
+  <button>Envoyer</button>
 </form> 
+
+<!-- <select name="selectCategory" id="">
+  <option value="">Selectionner la categorie... </option>
+  <?php
+  //var_dump($categorys);die;
+    foreach($categorys as $category){
+      ?>
+      <option value="<?= $category->getId()?>"><?= $category->getTitle()?></option>
+      <?php
+    }
+    ?>
+</select> -->
