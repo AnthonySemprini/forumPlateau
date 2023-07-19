@@ -40,6 +40,9 @@ class ForumController extends AbstractController implements ControllerInterface{
             
   
             $topicManager = new TopicManager();
+            $categoryManager = new CategoryManager();
+           
+
   
               //var_dump($topicManager->findAll(['title', "ASC"])->current());die;
         
@@ -47,8 +50,17 @@ class ForumController extends AbstractController implements ControllerInterface{
                 "view" => VIEW_DIR."forum/listTopics.php",
                 "data" => [
                
-                   "topics" => $topicManager->findTopicByCategory($id)
+                   "topics" => $topicManager->findTopicByCategory($id),
+                   "categorys" => $categoryManager->findAll(['title', "ASC"])
                     ]];
+          }
+
+          public function addTopic($id){
+
+            $topicManager = new TopicManager();
+            $categoryManager = new CategoryManager();
+
+            
           }
 
          public function listPosts($id){

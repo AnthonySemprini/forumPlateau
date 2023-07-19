@@ -1,6 +1,7 @@
 <?php
 
 $topics = $result["data"]['topics'];
+$categorys = $result["data"]['categorys'];
 //var_dump($topics);die;
   if(isset($topics)){
 ?>
@@ -24,6 +25,19 @@ foreach($topics as $topic ){
 }
 ?>
 <form action="">
-  <input type="text">
-<button>Crée un topic</button>
+  
+  <input type="text" >
+  <br>
+  <select name="selectCategory" id="">
+    <option value="">Selectionner la categorie... </option>
+    <?php
+    //var_dump($categorys);die;
+      foreach($categorys as $category){
+        ?>
+        <option value="<?= $category->getId()?>"><?= $category->getTitle()?></option>
+        <?php
+      }
+      ?>
+  </select>
+<button>Envoyer</button>
 </form> 
