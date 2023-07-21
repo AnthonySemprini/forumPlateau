@@ -15,7 +15,7 @@ foreach($topics as $topic ){
         ?>
     <a href="index.php?ctrl=forum&action=listPosts&id=<?=$topic->getId() ;?>">
     <p><?=$topic->getTitle()."</a><br>
-    Texte: ".$topic->getTexte()."<br>
+    text: ".$topic->gettext()."<br>
     Crée par ".$topic->getUser()."<br> 
     Date :".$topic->getDateCrea() ?></p>
     <?php
@@ -34,7 +34,7 @@ foreach($topics as $topic ){
   <input type="text" name="title">
   <br>
   <p>Resume</p>
-  <input type="text" name="texte">
+  <input type="text" name="text">
   <br>
   <input type="submit" name="submit" >
 </form> 

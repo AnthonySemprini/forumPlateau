@@ -66,9 +66,9 @@ class ForumController extends AbstractController implements ControllerInterface{
                         if(isset($_POST['submit'])){
                             //var_dump($_POST['submit']);die;
                             
-                            if(isset($_POST['title']) && ($_POST['texte']) && (!empty($_POST['title'])) && ($_POST['texte'])){// verifie si title existe et si il est vide
+                            if(isset($_POST['title']) && ($_POST['text']) && (!empty($_POST['title'])) && ($_POST['text'])){// verifie si title existe et si il est vide
                                 $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                                $texte = filter_input(INPUT_POST,'texte',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                                $text = filter_input(INPUT_POST,'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                                 
                                 
@@ -76,37 +76,66 @@ class ForumController extends AbstractController implements ControllerInterface{
                                     
                                     //var_dump("test4"),die,
                                     "title"=>$title,
-                                    "texte"=>$texte,
+                                    "text"=>$text,
                                     "user_id"=>$user,
                                     "category_id"=>$id
                                 ]);
-                            }    //var_dump($texte);die;
-                            
+                            }    
                             
                         }
                         $this->redirectTo("forum",'listTopics',$id);   
                 }
                 
-
-        
-
-         public function listPosts($id){
-            //var_dump("ok");die;
+                
+                
+                public function addPost($id){ 
+                    $postManager = new postManager();
+                    //if($_SESSION['user']){
+                        $user = 1;
+                        
+                        //var_dump("test2");die;
+                        
+                        if(isset($_POST['submit'])){
+                    //var_dump($_POST['submit']);die;
+                    
+                    if(isset($_POST['text']) && !empty($_POST['text'])){// verifie si text existe et si il est vide
+                        $text = filter_input(INPUT_POST,'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                        
+                        
+                        
+                        $postManager->add( $data=[
+                            
+                            //var_dump("test4"),die,
+                            
+                            "text"=>$text,
+                            "user_id"=>$user,
+                            "topic_id"=>$id
+                        ]);
+                            //var_dump($text);die;
+                        //var_dump($text);die;
+                    }    
+                    $this->redirectTo("forum",'listPosts',$id);   
+            }
             
-  
-              $postManager = new PostManager();
-  
-              //var_dump($postManager->findAll(['title', "ASC"])->current());die;
-           
-              return [
-                  "view" => VIEW_DIR."forum/listPosts.php",
-                  "data" => [
-               
-                      "posts" => $postManager->findPostByTopics($id)
-                      ]
-                  ];
-          }
- 
-        
-
-    }
+    
+        }
+                    
+                    
+                    
+                             public function listPosts($id){
+                                //var_dump("ok");die;
+                                
+                      
+                                  $postManager = new PostManager();
+                      
+                                  //var_dump($postManager->findAll(['title', "ASC"])->current());die;
+                               
+                                  return [
+                                      "view" => VIEW_DIR."forum/listPosts.php",
+                                      "data" => [
+                                   
+                                          "posts" => $postManager->findPostByTopics($id)
+                                          ]
+                                      ];
+                              }
+                }

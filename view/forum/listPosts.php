@@ -9,7 +9,9 @@ if(isset($posts)){
 <?php
 foreach($posts as $post ){
     ?>
-  <p><?=$post->gettext()."<br>Poster par : ".$post->getUser()."<br>Date : ".$post->getDateCrea()?></p>
+  <p><?=htmlspecialchars_decode($post->gettext())?><br></p>
+  <p>Poster par : <?= $post->getUser()?></p><br>
+  <p>Date : <?= $post->getDateCrea()?></p>
     <?php
 }
 }else{
@@ -18,5 +20,7 @@ foreach($posts as $post ){
 }
 ?>
 
-<div class="post">
-  </div>
+<form method="POST" action="index.php?ctrl=forum&action=addPost&id=<?= $_GET['id']?>">
+<input class="post" name="text" >
+<input name="submit" type="submit">
+</form>
