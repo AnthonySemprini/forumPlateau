@@ -29,9 +29,4 @@
             );
         }
 
-        public function addTopic($id){ 
-
-            $sql = "INSERT INTO ".$this->tableName." (title, category_id, user_id)
-                    VALUES (:title, :category_id, 1)"; 
     }
-}

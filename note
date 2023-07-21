@@ -1,0 +1,11 @@
+<!-- <select name="selectCategory" id="">
+  <option value="">Selectionner la categorie... </option>
+  <?php
+  //var_dump($categorys);die;
+    foreach($categorys as $category){
+      ?>
+      <option value="<?= $category->getId()?>"><?= $category->getTitle()?></option>
+      <?php
+    }
+    ?>
+</select> -->

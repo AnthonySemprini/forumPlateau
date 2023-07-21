@@ -26,25 +26,11 @@ foreach($topics as $topic ){
 ?>
 
 
-<form method="POST" action="index.php?action=">
+<form method="POST" action="index.php?ctrl=forum&action=addTopic&id=<?= $_GET['id']?>">
   <p>Titre</p>
   <input type="text" name="title">
   <br>
-  <p>Premier post</p>
-  <input type="text" name="firstPost">
-  <br>
-  <br>
-  <button>Envoyer</button>
+  <input type="submit" name="submit" >
 </form> 
 
-<!-- <select name="selectCategory" id="">
-  <option value="">Selectionner la categorie... </option>
-  <?php
-  //var_dump($categorys);die;
-    foreach($categorys as $category){
-      ?>
-      <option value="<?= $category->getId()?>"><?= $category->getTitle()?></option>
-      <?php
-    }
-    ?>
-</select> -->
+

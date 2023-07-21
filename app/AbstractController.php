@@ -10,8 +10,9 @@
             if($ctrl  != "home"){
                 $url = $ctrl ? "?ctrl=".$ctrl : "";
                 $url.= $action ? "&action=".$action : "";
-                $url.= $id ? "&id".$id : "";
+                $url.= $id ? "&id=".$id : "";
             }
+            // en premier mettre le controller en 2 la paage topic puis id si besoin $this->redirectTo("forum",'listTopics',$id);  
             else $url = "/";
             header("Location: $url");
             die();

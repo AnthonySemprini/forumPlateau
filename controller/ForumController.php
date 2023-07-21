@@ -36,7 +36,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         
          
        public function listTopics($id){
-            //var_dump("ok");die;
+            
             
   
             $topicManager = new TopicManager();
@@ -54,18 +54,36 @@ class ForumController extends AbstractController implements ControllerInterface{
                    //"categorys" => $categoryManager->findAll(['title', "ASC"])
                    ]];
                 }
+                //var_dump("ok");die;
                 
-                public function ajoutTopic($id){ 
-                    
+                public function addTopic($id){ 
                     $topicManager = new TopicManager();
-                    
-           return[
-            "view" => VIEW_DIR."forum/listTopics.php",
-            "data" => [
-
-                "topics" => $topicManager->addTopic($id)
-           ]];
-    }
+                    //if($_SESSION['user']){
+                        $user = 1;
+                        
+                        //var_dump("test2");die;
+                        
+                        if(isset($_POST['submit'])){
+                            //var_dump($_POST['submit']);die;
+                            
+                            if(isset($_POST['title']) && (!empty($_POST['title']))){// verifie si title existe et si il est vide
+                                $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                                
+                                
+                                $topicManager->add( $data=[
+                                    
+                                    //var_dump("test4"),die,
+                                    "title"=>$title,
+                                    "user_id"=>$user,
+                                    "category_id"=>$id
+                                ]);
+                                //var_dump($title);die;
+                            }
+                            
+                        }
+                        $this->redirectTo("forum",'listTopics',$id);   
+                }
+                
 
         
 
