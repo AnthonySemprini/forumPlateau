@@ -66,19 +66,22 @@ class ForumController extends AbstractController implements ControllerInterface{
                         if(isset($_POST['submit'])){
                             //var_dump($_POST['submit']);die;
                             
-                            if(isset($_POST['title']) && (!empty($_POST['title']))){// verifie si title existe et si il est vide
+                            if(isset($_POST['title']) && ($_POST['texte']) && (!empty($_POST['title'])) && ($_POST['texte'])){// verifie si title existe et si il est vide
                                 $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                                $texte = filter_input(INPUT_POST,'texte',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
                                 
                                 
                                 $topicManager->add( $data=[
                                     
                                     //var_dump("test4"),die,
                                     "title"=>$title,
+                                    "texte"=>$texte,
                                     "user_id"=>$user,
                                     "category_id"=>$id
                                 ]);
-                                //var_dump($title);die;
-                            }
+                            }    //var_dump($texte);die;
+                            
                             
                         }
                         $this->redirectTo("forum",'listTopics',$id);   

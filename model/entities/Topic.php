@@ -7,6 +7,7 @@
 
         private $id;
         private $title;
+        private $texte;
         private $dateCrea;
         private $locked;
         private $category;
@@ -53,6 +54,23 @@
         public function setTitle($title)
         {
                 $this->title = $title;
+
+                return $this;
+        }
+
+        public function getTexte()
+        {
+                return $this->texte;
+        }
+
+        /**
+         * Set the value of texte
+         *
+         * @return  self
+         */ 
+        public function setTexte($texte)
+        {
+                $this->texte = $texte;
 
                 return $this;
         }

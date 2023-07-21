@@ -14,7 +14,10 @@ foreach($topics as $topic ){
         
         ?>
     <a href="index.php?ctrl=forum&action=listPosts&id=<?=$topic->getId() ;?>">
-    <p><?=$topic->getTitle()."</a><br>Crée par ".$topic->getUser()."<br> Date :".$topic->getDateCrea() ?></p>
+    <p><?=$topic->getTitle()."</a><br>
+    Texte: ".$topic->getTexte()."<br>
+    Crée par ".$topic->getUser()."<br> 
+    Date :".$topic->getDateCrea() ?></p>
     <?php
 
 
@@ -29,6 +32,9 @@ foreach($topics as $topic ){
 <form method="POST" action="index.php?ctrl=forum&action=addTopic&id=<?= $_GET['id']?>">
   <p>Titre</p>
   <input type="text" name="title">
+  <br>
+  <p>Resume</p>
+  <input type="text" name="texte">
   <br>
   <input type="submit" name="submit" >
 </form> 
