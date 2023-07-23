@@ -1,5 +1,5 @@
 <h1>S'inscrire</h1>
-<form action="SecurityController.php?action=register" method="POST">
+<form action="SecurityController.php?action=register" method="post">
     <label for="pseudo">Pseudo</label>
     <input type="text" name="pseudo" id="pseudo"><br>
 

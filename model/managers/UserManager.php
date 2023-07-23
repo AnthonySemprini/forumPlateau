@@ -14,6 +14,3 @@
         public function __construct(){
             parent::connect();
         }
-
-
-    }

@@ -1,10 +1,11 @@
 <h1>Se connecter</h1>
-<form action="">
-<label for="pseudo">Pseudo</label>
-    <input type="text" name="pseudo" id="pseudo"><br>
+<form action="SecurityController.php?action=login" method="post">
+    <label for="email">email</label>
+    <input type="email" name="email" id="email"><br>
 
     <label for="pass1">Mot de passe</label>
-    <input type="password" name="pass1" id="pass1"><br>
+    <input type="password" name="pass1" id="pass1"
+    minlength="5" required ><br>
 
     <input name="submit" type="submit">
 </form>
