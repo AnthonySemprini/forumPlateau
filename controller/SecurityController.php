@@ -49,62 +49,65 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 $pass1 = filter_input(INPUT_POST,"pass1",FILTER_SANITIZE_SPECIAL_CHARS);
                 $pass2 = filter_input(INPUT_POST,"pass2",FILTER_SANITIZE_SPECIAL_CHARS);
 
-            if($pseudo && $email && $pass1 && $pass2){//verifie si tt est remplie
-                // $requet = $pdo->prepare("SELECT * FROM user WHERE email = :email");
-                // $requet->execute(["email" => $email]);
-                // $user = $requet->fetch();
-                
-                if(!$userManager->findUser($email)){
-                    // si l'utilisateur exist
+                // if($pseudo && $email && $pass1 && $pass2){
+                    //verifie si tt est remplie
                     
-                    // if($user){
-                        //     $this->redirectTo("security","register");
-                        // }else{
-                            //var_dump("no user");die;
-                            //insertion de l'utilisateur dans la bdd
-                            if($pass1 == $pass2 && strlen($pass1) >= 5){
+                    //var_dump($pseudo, $email, $pass1);die;
+                    
+                    // if(!$userManager->findUser($email)){
+                        // verif si l'utilisateur exist deja
+                        
+                        // if($pass1 == $pass2 && strlen($pass1) >= 5){
+                            //verif si pass 1 et pass2 son egal et qu'ils ont au moin 5 caracthéres
+                            
+                            $userManager->add([
                                 // var_dump("ok");die;
-                                
-                                $userManager->add($data = [
-                                    "password" => password_hash($pass1, PASSWORD_DEFAULT), 
-                                    "pseudo" => $pseudo ,
-                                    "email" => $email 
-                                ]);
-                                $this->redirectTo("security","loginForm");
-                            }else{
-                                //message "les mots de passe ne sont pas identique ou trop court
-                            }
-                        }
-                    }else{
-                //probleme de saisie dans les champs du formulaire
+                                "pseudo" => $pseudo ,
+                                "pasword" => password_hash($pass1, PASSWORD_DEFAULT), 
+                                "email" => $email 
+                            ]);
+        //                     $this->redirectTo("security","loginForm");
+        //                         }else{
+        //                             echo "les mots de passe ne sont pas identique ou trop court";
+        //                         }
+                            
+        //             }else{
+        //                 echo "Veuillez remplir tous les champs";
+        //             }
+        //         }
             }
-        }
         }
     }
 
+
         public function login(){
+
+            $userManager = new UserManager();
+
             if($_POST["submit"]){
-                $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_SPECIAL_CHARS,FILTER_VALIDATE_EMAIL);
+                $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_SPECIAL_CHARS,FILTER_VALIDATE_EMAIL); //contre faille XSS
                 $pass1 = filter_input(INPUT_POST,"pass1",FILTER_SANITIZE_SPECIAL_CHARS);
 
-                if($email && $pass1){
-                    $requet = $pdo->prepare("SELECT * FROM user WHERE email = :email");
-                $requet->execute(["email" => $email]);
-                $user = $requet->fetch();
+                if($email && $pass1){// verif form bien rempli
+
+                //     $requet = $pdo->prepare("SELECT * FROM user WHERE email = :email");
+                // $requet->execute(["email" => $email]);
+                // $user = $requet->fetch();
                     //est ce que user exist
-                    if($user){
-                        $hash = $user['password'];
+
+                    if($email){
+                        $hash = $email['password'];
                         if(password_verify($pass1,$hash));{
-                            $_SESSION['user'] = $user;
+                            $_SESSION['user'] = $email;
                             header("Location: home.php");exit;
                         }
-                        }else{
-                            header("Location: login.php");exit;
-                        }
                     }else{
+                            header("Location: login.php");exit;
+                    }
+                }else{
 
-                        }
                 }
+            }
                 $this->redirectTo("security","login");
         }
 

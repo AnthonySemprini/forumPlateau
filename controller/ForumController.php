@@ -89,7 +89,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 
                 
                 public function addPost($id){ 
-                    $postManager = new postManager();
+                    $postManager = new PostManager();
                     //if($_SESSION['user']){
                         $user = 1;
                         
