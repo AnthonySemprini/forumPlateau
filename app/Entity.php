@@ -18,7 +18,7 @@
                     $FQCName = "Model\Managers".DS.$manName;
 
                     //!MasOs path
-                    //$FQCName ="Model\\Managers\\".$manName;
+                    //$FQCName ="ModelANTISLASH\\Managers\\".$manName;
                     $man = new $FQCName();
                     $value = $man->findOneById($value);
                 }
