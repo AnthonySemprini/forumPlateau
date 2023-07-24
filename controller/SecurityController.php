@@ -15,15 +15,31 @@ class SecurityController extends AbstractController implements ControllerInterfa
     public function index(){}
     
     public function listUsers(){
-        $userManager =  UserManager();
+        $userManager = new UserManager();
 
         return [
             "view" => VIEW_DIR."forum/listUsers.php",
             "data" => [
-                "users" =>$userManager->findEmailByUser($email),
+                "users" =>$userManager->findUser($email),
             ]];
     }
+
+
+    public function registerForm(){
+        return [
+            "view" => VIEW_DIR."security/register.php"
+        ];
+    }
+
+    public function loginForm(){
+        return [
+            "view" => VIEW_DIR."security/login.php"
+        ];
+    }
+
     public function register(){
+
+        $userManager = new UserManager();
 
         if(isset($_GET['action'])){
             if($_POST["submit"]) {
@@ -33,33 +49,28 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 $pass1 = filter_input(INPUT_POST,"pass1",FILTER_SANITIZE_SPECIAL_CHARS);
                 $pass2 = filter_input(INPUT_POST,"pass2",FILTER_SANITIZE_SPECIAL_CHARS);
 
-            if($pseudo && $email && $pass1 && $pass2){
-                //var_dump("ok");die;
+            if($pseudo && $email && $pass1 && $pass2){//verifie si tt est remplie
                 // $requet = $pdo->prepare("SELECT * FROM user WHERE email = :email");
                 // $requet->execute(["email" => $email]);
                 // $user = $requet->fetch();
-                return[
-                    "view" => VIEW_DIR."forum/listUsers.php",
-                    "data" =>[
-                        "user" => $userManager->findEmailByUser($email),
-                ]];
-            }
-
-                // si l'utilisateur exist
-            
-                        if($user){
-                            $this->redirectTo("security","register");
-                        }else{
+                
+                if(!$userManager->findUser($email)){
+                    // si l'utilisateur exist
+                    
+                    // if($user){
+                        //     $this->redirectTo("security","register");
+                        // }else{
                             //var_dump("no user");die;
                             //insertion de l'utilisateur dans la bdd
                             if($pass1 == $pass2 && strlen($pass1) >= 5){
+                                // var_dump("ok");die;
                                 
-                                $insertUser->add($data = [
+                                $userManager->add($data = [
                                     "password" => password_hash($pass1, PASSWORD_DEFAULT), 
                                     "pseudo" => $pseudo ,
                                     "email" => $email 
                                 ]);
-                                $this->redirectTo("security","login");
+                                $this->redirectTo("security","loginForm");
                             }else{
                                 //message "les mots de passe ne sont pas identique ou trop court
                             }
@@ -69,8 +80,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
             }
         }
         }
-    }    
-
+    }
 
         public function login(){
             if($_POST["submit"]){
@@ -106,3 +116,4 @@ class SecurityController extends AbstractController implements ControllerInterfa
             unset($_SESSION['user']);
             header("Location: home.php");exit;
         }
+}

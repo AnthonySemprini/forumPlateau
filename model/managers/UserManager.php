@@ -16,14 +16,14 @@
             parent::connect();
         }
 
-        public function findEmailByUser($id){
+        public function findUser($email){
 
             $sql = "SELECT *
             FROM ".$this->tableName." u
-            WHERE id_user = :id";
+            WHERE email = :email";
             
             return $this->getMultipleResults(
-                DAO::select($sql, ['id' => $id]),
+                DAO::select($sql, ['email' => $email]),
                 $this->className
             );
         }

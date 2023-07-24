@@ -1,5 +1,5 @@
 <h1>Se connecter</h1>
-<form action="SecurityController.php?action=login" method="post">
+<form action="index.php?ctrl=security&action=login" method="post">
     <label for="email">email</label>
     <input type="email" name="email" id="email"><br>
 
