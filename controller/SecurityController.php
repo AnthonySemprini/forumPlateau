@@ -53,7 +53,7 @@ if(isset($_GET['action'])){
         }
     }
 }
-}
+
 break;
 
 case "login":
@@ -72,5 +72,6 @@ case "login":
         break;
 }
     }
+}
 }
 }
