@@ -35,18 +35,13 @@
                         
                         if(App\Session::getUser()){
                             ?>
-                            <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                            <a href="/security/logout.html">Déconnexion</a>
+                            <a href="index.php?ctrl=security&action=profil"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
+                            <a href="index.php?ctrl=security&action=logOut">Déconnexion</a>
                             <?php
                         }
                         else{
                             ?>
-                            <?php
-                            if(isset($_SESSION['user'])) { ?>
-                                <a href="index.php?ctrl=security&action=logout">Se deconnecter</a>
-                                <a href="index.php?ctrl=security&action=profil">Mon profil</a>
-                                
-                                <?php }else{ ?>
+                           
                                     <p>
                                         <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
                                         <span>&nbsp;-&nbsp;</span>
@@ -56,7 +51,7 @@
                                     <?php } ?>
 
                         <?php
-                        }
+                        //}
                    
                         
                     ?>

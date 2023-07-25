@@ -117,8 +117,8 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $this->redirectTo("security","profil");
 
         }
-        public function logout(){
+        public function logOut(){
             unset($_SESSION['user']);
-            header("Location: home.php");exit;
+            $this->redirectTo("view","home");
         }
 }
