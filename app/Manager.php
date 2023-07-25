@@ -90,7 +90,7 @@
         }
 
         protected function getOneOrNullResult($row, $class){
-
+            //var_dump($row);die;
             if($row != null){
                 return new $class($row);
             }

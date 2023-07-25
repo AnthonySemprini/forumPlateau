@@ -64,7 +64,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                                 // var_dump("ok");die;
                                 "pseudo" => $pseudo ,
                                 "password" => password_hash($pass1, PASSWORD_DEFAULT), 
-                                "email" => $email 
+                                "email" => $email, 
                             ]);
                             $this->redirectTo("security","loginForm");
                                 }else{
@@ -88,31 +88,29 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $userManager = new UserManager();
 
             if($_POST["submit"]){
+                //si submit valider
                 $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_SPECIAL_CHARS,FILTER_VALIDATE_EMAIL); //contre faille XSS
                 $pass1 = filter_input(INPUT_POST,"pass1",FILTER_SANITIZE_SPECIAL_CHARS);
 
                 if($email && $pass1){// verif form bien rempli
                     $user = $userManager->findUser($email);
-                    
-                //     $requet = $pdo->prepare("SELECT * FROM user WHERE email = :email");
-                // $requet->execute(["email" => $email]);
-                // $user = $requet->fetch();
                     //est ce que user exist
 
-                    if($user){
-                        $hash = $user['password'];
-                        if(password_verify($pass1,$hash)){
+                    // recup password dans user pour stock dans $hash
+                        if($user && password_verify($pass1,$user->getPassword())){
+                            //verif pass1 et = a $hash
                             $_SESSION['user'] = $user;
-                            header("Location: home.php");exit;
+                            // ouvre session user
+                            header("Location: index.php?ctrl=home&action=index");exit;
                         }
-                    }else{
-                            header("Location: login.php");exit;
-                    }
-                }else{
-
-                }
+                //     }else{
+                //             header("Location: login.php");exit;
+                //     }
+                // }else{
+               // }
+                 }
             }
-                $this->redirectTo("security","login");
+                // $this->redirectTo("security","login");
         }
 
         public function profil(){

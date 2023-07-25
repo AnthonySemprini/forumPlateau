@@ -8,7 +8,7 @@
         private $id;
         private $pseudo;
         private $password;
-        private $registrationDate;
+        private $dateRegistration;
         private $email;
         private $role;
         
@@ -74,15 +74,7 @@
                 return $this;
         }
 
-        public function getRegistrationDate(){
-            $formattedDate = $this->registrationDate->format("d/m/Y, H:i:s");
-            return $formattedDate;
-        }
-
-        public function setRegistrationDate($date){
-            $this->registrationDate = new \DateTime($date);
-            return $this;
-        }
+      
 
         /**
          * Get the value of email
@@ -126,4 +118,29 @@
         public function __toString(){
                 return $this->pseudo;
         }
+
+        /**
+         * Get the value of dateRegistration
+         */
+        public function getDateRegistration()
+        {
+                return $this->dateRegistration;
+        }
+
+        /**
+         * Set the value of dateRegistration
+         */
+        public function setDateRegistration($dateRegistration): self
+        {
+                $this->dateRegistration = $dateRegistration;
+
+                return $this;
+        }
+
+        public function hasRole($role){
+                if($role == $this->role){
+                return true;
+        }
+        return false;
     }
+}

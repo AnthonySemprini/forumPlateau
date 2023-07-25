@@ -3,7 +3,6 @@
     
     use App\Manager;
     use App\DAO;
-    use Model\Managers\UserManager;
     
     class UserManager extends Manager{
 
@@ -18,12 +17,10 @@
 
         public function findUser($email){
 
-            $sql = "SELECT *
-            FROM ".$this->tableName." u
-            WHERE email = :email";
+            $sql = "SELECT * FROM ".$this->tableName." u WHERE email = :email";
             
-            return $this->getMultipleResults(
-                DAO::select($sql, ['email' => $email]),
+            return $this->getOneOrNullResult(
+                DAO::select($sql, ['email' => $email], false),
                 $this->className
             );
         }
