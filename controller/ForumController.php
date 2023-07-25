@@ -8,6 +8,7 @@ use App\ControllerInterface;
 use Model\Managers\TopicManager;
 use Model\Managers\CategoryManager;
 use Model\Managers\PostManager;
+use Model\Managers\UserManager;
 
 class ForumController extends AbstractController implements ControllerInterface{
     
@@ -137,5 +138,17 @@ class ForumController extends AbstractController implements ControllerInterface{
                                           "posts" => $postManager->findPostByTopics($id)
                                           ]
                                       ];
+                              }
+
+                              public function profilUser($id){
+                                $userManager = new UserManager();
+
+                                return[
+                                    "view" => VIEW_DIR."forum/profil.php",
+                                    "data" => [
+                                        "user" => $userManager->findUser($id)
+
+                                    ]
+                                    ];
                               }
                 }
