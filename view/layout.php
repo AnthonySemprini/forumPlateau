@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id="wrapper"> 
-       
+        
         <div id="mainpage">
             <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
             <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
@@ -20,6 +20,7 @@
                 <nav>
                     <div id="nav-left">
                         <a href="index.php?home">Accueil</a>
+                        <a href="index.php?ctrl=forum&action=listCategory">Liste des categorie</a>
                         <?php
                         if(App\Session::isAdmin()){
                             ?>
@@ -44,16 +45,16 @@
                             if(isset($_SESSION['user'])) { ?>
                                 <a href="index.php?ctrl=security&action=logout">Se deconnecter</a>
                                 <a href="index.php?ctrl=security&action=profil">Mon profil</a>
-                            <?php }else{ ?>
-                            <p>
-                                <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
-                                <span>&nbsp;-&nbsp;</span>
-                                <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
-                            </p>
+                                
+                                <?php }else{ ?>
+                                    <p>
+                                        <a href="index.php?ctrl=security&action=loginForm">Se connecter</a>
+                                        <span>&nbsp;-&nbsp;</span>
+                                        <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a>
+                                    </p>
+                                    
+                                    <?php } ?>
 
-    <?php } ?>
-
-                            <a href="index.php?ctrl=forum&action=listCategory">Liste des categorie</a>
                         <?php
                         }
                    
