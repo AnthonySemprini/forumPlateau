@@ -45,7 +45,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                                 "password" => password_hash($pass1, PASSWORD_DEFAULT), 
                                 "email" => $email, 
                             ]);
-                            $this->redirectTo("security","loginForm");
+                            $this->redirectTo("security","login");
                                 }else{
                                     echo "les mots de passe ne sont pas identique ou trop court";
                                 }
@@ -88,15 +88,15 @@ class SecurityController extends AbstractController implements ControllerInterfa
                             // ouvre session user
                             header("Location: index.php?ctrl=home&action=index");exit;
                         }
-                //     }else{
-                //             header("Location: login.php");exit;
-                //     }
-                // }else{
-               // }
-                 }
-            }
-                // $this->redirectTo("security","login");
+                    }else{
+                            header("Location: login.php");exit;
+                    }
+                }else{
+                    $this->redirectTo("security","login");
+               }
         }
+            
+        
 
         public function loginForm(){
             return [

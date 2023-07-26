@@ -27,24 +27,5 @@
 
         
 
-        public function verifEmail($email){
-
-            $sql = "SELECT *
-                    FROM" .$this->tableName."u
-                    WHERE email = :email";
-                    return $this->getMultipleResults(
-                        DAO::select($sql, ['email' => $email]),
-                        $this->className
-                    );    
-        }
-        public function verifPassWord($password){
-            $sql = "SELECT *
-            FROM" .$this->tableName."u
-            WHERE password = :password";
-            return $this->getMultipleResults(
-                DAO::select($sql, ['password' => $password]),
-                $this->className
-            );    
-        }
-
+       
     }

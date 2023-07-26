@@ -14,9 +14,9 @@
          * @return Collection a collection of objects hydrated by DAO, which are results of the request sent
          */
         public function findAll($order = null){
-
             $orderQuery = ($order) ?                 
-                "ORDER BY ".$order[0]. " ".$order[1] :
+            "ORDER BY ".$order[0]. " ".$order[1] :
+            //var_dump('ok');die;
                 "";
 
             $sql = "SELECT *

@@ -1,9 +1,9 @@
 <?php
 
 $users = $result["data"]['user'];
-//var_dump(['data']['users']);
+//var_dump($users);die;
 if(isset($users)){   
-?>
+  ?>
 
 <h1>Liste des users</h1>
 

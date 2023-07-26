@@ -167,7 +167,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             "view" => VIEW_DIR."forum/listUsers.php",   //? dirige vers la list
             "data" => [
             
-            "user" => $userManager->findAll(['pseudo']),   //? recup les Pseudo
+            "user" => $userManager->findAll(),   //? recup les Pseudo
             
             
                 ]
