@@ -1,12 +1,12 @@
 <?php
 
 $topics = $result["data"]['topics'];
-//$categorys = $result["data"]['categorys'];
+$categorys = $result["data"]['categorys'];
 //var_dump($topics);die;
   if(isset($topics)){
 ?>
 
-<h1>Liste des topics</h1>
+<h1>Liste des topics </h1>
 
 <?php
     

@@ -59,7 +59,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 
                 public function addTopic($id){ 
                     $topicManager = new TopicManager();
-                    //if($_SESSION['user']){
+                    if($_SESSION['user']){
                         $user = 1;
                         
                         //var_dump("test2");die;
@@ -78,21 +78,21 @@ class ForumController extends AbstractController implements ControllerInterface{
                                     //var_dump("test4"),die,
                                     "title"=>$title,
                                     "text"=>$text,
-                                    "user_id"=>$user,
+                                    "user_id"=>$_SESSION['user']->getId(),
                                     "category_id"=>$id
                                 ]);
                             }    
                             
                         }
                         $this->redirectTo("forum",'listTopics',$id);   
+                    }
                 }
-                
                 
                 
                 public function addPost($id){ 
                     $postManager = new PostManager();
-                    //if($_SESSION['user']){
-                        $user = 1;
+                    if($_SESSION['user']){
+                        
                         
                         //var_dump("test2");die;
                         
@@ -109,19 +109,19 @@ class ForumController extends AbstractController implements ControllerInterface{
                             //var_dump("test4"),die,
                             
                             "text"=>$text,
-                            "user_id"=>$user,
+                            "user_id"=>$_SESSION['user']->getId(),
                             "topic_id"=>$id
                         ]);
                             //var_dump($text);die;
                         //var_dump($text);die;
                     }    
                     $this->redirectTo("forum",'listPosts',$id);   
-            }
+                    }
             
     
-        }
+                    }
                     
-                    
+                }                
                     
                              public function listPosts($id){
                                 //var_dump("ok");die;
@@ -150,5 +150,23 @@ class ForumController extends AbstractController implements ControllerInterface{
 
                                     ]
                                     ];
+                              }
+                              public function listUsers($id){
+                                //var_dump("ok");die;
+                                
+                      
+                                  $userManager = new UserManager();
+                      
+                                  //var_dump($postManager->findAll(['title', "ASC"])->current());die;
+                               
+                                  return [
+                                      "view" => VIEW_DIR."forum/listUsers.php",
+                                      "data" => [
+                                      
+                                        "user" => $userManager->findAll(['pseudo']),
+                                        
+                                        
+                                          ]
+                                      ];
                               }
                 }
