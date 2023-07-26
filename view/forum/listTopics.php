@@ -1,7 +1,7 @@
 <?php
 
 $topics = $result["data"]['topics'];
-$categorys = $result["data"]['categorys'];
+
 //var_dump($topics);die;
   if(isset($topics)){
 ?>
@@ -18,6 +18,7 @@ foreach($topics as $topic ){
     text: ".$topic->gettext()."<br>
     Crée par ".$topic->getUser()."<br> 
     Date :".$topic->getDateCrea() ?></p>
+    <a style="color:red" href="index.php?ctrl=forum&action=deleteTopic&id=<?=$topic->getId()?>">Supprimer votre topic</a>
     <?php
 
 
@@ -29,7 +30,7 @@ foreach($topics as $topic ){
 ?>
 
 
-<form method="POST" action="index.php?ctrl=forum&action=addTopic&id=<?= $_GET['id']?>">
+<form method="POST" action="index.php?ctrl=forum&action=addTopic&id=<?= $_GET['id']?>
   <p>Titre</p>
   <input type="text" name="title">
   <br>

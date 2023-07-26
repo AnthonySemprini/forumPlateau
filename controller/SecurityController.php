@@ -14,28 +14,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
     
     public function index(){}
     
-    public function listUsers(){
-        $userManager = new UserManager();
-
-        return [
-            "view" => VIEW_DIR."forum/listUsers.php",
-            "data" => [
-                "users" =>$userManager->findUser($email),
-            ]];
-    }
-
-    
-    public function registerForm(){
-        return [
-            "view" => VIEW_DIR."security/register.php"
-        ];
-    }
-
-    public function loginForm(){
-        return [
-            "view" => VIEW_DIR."security/login.php"
-        ];
-    }
+    //!--------------------------------- REGISTER ------------------------------------------------
 
     public function register(){
 
@@ -81,7 +60,13 @@ class SecurityController extends AbstractController implements ControllerInterfa
             }
         }
     
+        public function registerForm(){
+            return [
+                "view" => VIEW_DIR."security/register.php"
+            ];
+        }
 
+     //!--------------------------------- LOGIN ------------------------------------------------    
 
         public function login(){
 
@@ -113,12 +98,35 @@ class SecurityController extends AbstractController implements ControllerInterfa
                 // $this->redirectTo("security","login");
         }
 
-        public function profil(){
-            $this->redirectTo("security","profil");
-
+        public function loginForm(){
+            return [
+                "view" => VIEW_DIR."security/login.php"
+            ];
         }
+
+        
         public function logOut(){
             unset($_SESSION['user']);
             $this->redirectTo("view","home");
         }
+
+ //!--------------------------------- USER & PROFIL ------------------------------------------------
+
+        public function deleteUser($id){
+            $userManager = new UserManager();
+           
+            if(Session::isAdmin()){
+                $userManager->delete($id);
+                Session::addFlash("success","vous avez supprimer l'user avec succès");
+                $this->redirectTo("forum","listUsers");
+            }
+        }
+
+        public function profil(){
+            $this->redirectTo("security","profil");
+
+        }
+       
+            
+       
 }

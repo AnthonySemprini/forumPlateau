@@ -14,6 +14,7 @@ foreach($posts as $post ){
   <p><?=htmlspecialchars_decode($post->gettext())?><br></p>
   <p>Poster par : <?= $post->getUser()?></p><br>
   <p>Date : <?= $post->getDateCrea()?></p>
+  <a style="color:red" href="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>">Supprimer le post</a>
   <?php
 }
 }else{

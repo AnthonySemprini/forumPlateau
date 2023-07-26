@@ -5,7 +5,7 @@
 
     <label for="pass1">Mot de passe</label>
     <input type="password" name="pass1" id="pass1"
-    minlength="5" required><br>
+    minlength="5" required value="azerty"><br>
 
     <input name="submit" type="submit">
 </form>

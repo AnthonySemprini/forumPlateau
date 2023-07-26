@@ -12,11 +12,12 @@ foreach($users as $user ){
   ?>
   <table style=" border: solid black 1px; border-collapse: collapse; margin:15px">
     <tbody>
-      <tr style="">
+      <tr>
         <td style="padding:15px">
   <p>User : <?= $user->getPseudo()?></p>
   <p>Email :<?= $user->getEmail()?></p>
-  <a style="color:red" href="">Bannir</a><br>
+  <p>Role : <?=$user->getRole()?></p>
+  <a style="color:red" href="index.php?ctrl=security&action=deleteUser&id=<?=$user->getId() ?>">Bannir</a><br>
   </td>
   </tr>
   </tbody>
