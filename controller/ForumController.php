@@ -51,15 +51,15 @@ class ForumController extends AbstractController implements ControllerInterface{
     public function addTopic($id){ 
         $topicManager = new TopicManager();
         if($_SESSION['user']){
-            $user = 1;
+            
             
             //var_dump("test2");die;
             
             if(isset($_POST['submit'])){
                 //var_dump($_POST['submit']);die;
                 
-                if(isset($_POST['title']) && ($_POST['text']) && (!empty($_POST['title'])) && ($_POST['text'])){// verifie si title existe et si il est vide
-                    $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                if(isset($_POST['title']) && ($_POST['text']) && (!empty($_POST['title'])) && ($_POST['text'])){   //? verifie si title existe et si il est vide
+                    $title = filter_input(INPUT_POST,'title',FILTER_SANITIZE_FULL_SPECIAL_CHARS);                   //? protege de  faille xss
                     $text = filter_input(INPUT_POST,'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                     
                     
@@ -81,78 +81,72 @@ class ForumController extends AbstractController implements ControllerInterface{
                 
     public function deleteTopic($id){
         $topicManager = new TopicManager();
-        $userManager = new UserManager();
-        
-        if(Session::isAdmin()){
+       
+        $topic = $topicManager->findOneById($id);
+        if(Session::isAdmin() OR $topicManager->findOneById($id)->getUser() == Session::getUser()){   //? autorise a suppr l'admin et le createur du post
             $topicManager->delete($id);
-            Session::addFlash("success","vous avez supprimer le topic avec succès");
-            $this->redirectTo("view","home");
+            Session::addFlash("success","vous avez supprimer le topic avec succès");    //? affiche vous avez suppr
+            $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
         }else{
-            echo "Impossible pour vous de supprimer ce topic";
+            Session::addFlash("error","Impossible de supprime le topic");                //? envoi message erreur si suppr et refuse au user
+            $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
             
         }
         
     }
-
+    
     //!----------------------------- POST ----------------------------------------------
-
+    
     public function listPosts($id){
         $postManager = new PostManager();
         //var_dump("ok");die;
         return [
-                "view" => VIEW_DIR."forum/listPosts.php",
-                "data" => [
-            
-                    "posts" => $postManager->findPostByTopics($id)
-                    ]
-                ];
-    }
-    public function addPost($id){ 
-        $postManager = new PostManager();
-        if($_SESSION['user']){
-         
-
-            if(isset($_POST['submit'])){
-        //var_dump($_POST['submit']);die;
-        
-        if(isset($_POST['text']) && !empty($_POST['text'])){// verifie si text existe et si il est vide
-            $text = filter_input(INPUT_POST,'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            
-            
-            
-            $postManager->add( $data=[
+            "view" => VIEW_DIR."forum/listPosts.php",    //?  redirige vers listpost
+            "data" => [
                 
-                //var_dump("test4"),die,
+                "posts" => $postManager->findPostByTopics($id)
+                ]
+            ];
+        }
+
+        
+        public function addPost($id){ 
+            $postManager = new PostManager();
+            if($_SESSION['user']){
                 
-                "text"=>$text,
-                "user_id"=>$_SESSION['user']->getId(),
-                "topic_id"=>$id
-            ]);
-                //var_dump($text);die;
-            //var_dump($text);die;
-        }    
-        $this->redirectTo("forum",'listPosts',$id);   
-        }
-
-
-        }
+                
+                if(isset($_POST['submit'])){
+                    //var_dump($_POST['submit']);die;
+                    
+                    if(isset($_POST['text']) && !empty($_POST['text'])){                             //? verifie si text existe et si il est vide
+                        $text = filter_input(INPUT_POST,'text',FILTER_SANITIZE_FULL_SPECIAL_CHARS);   //? protege de  faille xss
+                        $postManager->add( $data=[
+                            "text"=>$text,
+                            "user_id"=>$_SESSION['user']->getId(),
+                            "topic_id"=>$id
+                        ]);
+                        //var_dump($text);die;
+                        //var_dump($text);die;
+                    }    
+                    $this->redirectTo("forum",'listPosts',$id);   
+                }
+            }
+            
+        }                
         
-    }                
-
-    public function deletePost($id){
-        $postManager = new PostManager();
-        $userManager = new UserManager();
-        
-        if(Session::isAdmin()){
-            $postManager->delete($id);
-            Session::addFlash("success","vous avez supprimer le post avec succès");
-            $this->redirectTo("view","home");
-        }else{
-            Session::addFlash("succes","Vous ne pouvez pas supprimer le post");
-            $this->redirectTo("forum","listposts");
+        public function deletePost($id){
+            $postManager = new PostManager();
+           
+            $post = $postManager->findOneById($id);
+            if(Session::isAdmin() OR $postManager->findOneById($id)->getUser() == Session::getUser() ){   //? autorise a suppr l'admin et le createur du post
+                $postManager->delete($id);
+                Session::addFlash("success","vous avez supprimer le post avec succès");                 //? affiche vous avez suppr
+                $this->redirectTo("forum","listposts",$post->getTopic()->getId());                      //? redirige vers la list de post du topic en question
+            }else{
+                Session::addFlash("error","Impossible de supprime le post");                           //? envoi message erreur si suppr et refuse au user
+                $this->redirectTo("forum","listposts",$post->getTopic()->getId());                    //? redirige vers la list de post du topic en question
+            }
         }
-
-    }
                     
     //!----------------------------- USER ----------------------------------------------
 
@@ -160,30 +154,23 @@ class ForumController extends AbstractController implements ControllerInterface{
         $userManager = new UserManager();
 
         return[
-            "view" => VIEW_DIR."forum/profil.php",
+            "view" => VIEW_DIR."forum/profil.php",    //? dirige vers la list
             "data" => [
-                "user" => $userManager->findUser($id)
-
-            ]
+                "user" => $userManager->findUser($id)   //? recup tt les infos de user
+                ]
             ];
     }
    
     public function listUsers($id){
-    //var_dump("ok");die;
-    
-
-    $userManager = new UserManager();
-
-    //var_dump($postManager->findAll(['title', "ASC"])->current());die;
-
-    return [
-        "view" => VIEW_DIR."forum/listUsers.php",
-        "data" => [
-        
-        "user" => $userManager->findAll(['pseudo']),
-        
-        
-            ]
-        ];
+        $userManager = new UserManager();
+        return [
+            "view" => VIEW_DIR."forum/listUsers.php",   //? dirige vers la list
+            "data" => [
+            
+            "user" => $userManager->findAll(['pseudo']),   //? recup les Pseudo
+            
+            
+                ]
+            ];
     }
 }
