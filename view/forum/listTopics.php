@@ -11,19 +11,15 @@ if(isset($topics)){
   <?php
     
   foreach($topics as $topic ){
-    //$locker = ($topic->getlocked());
+    $locker = ($topic->getlocked());
     //var_dump($locker);die;
 
-      // if($locker == 1){
-      //   addFlash("Topic verrouiller");    
-      //       $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());
-
-      // }else{
+      if($locker == 0){
       
 
             ?>
       <a href="index.php?ctrl=forum&action=listPosts&id=<?=$topic->getId() ;?>">
-      <p><?=$topic->getTitle()."</a><br>
+      <p><?=$topic->getTitle()." "."<i class='fa fa-lock'></i></a><br>
       text: ".$topic->gettext()."<br>
       Crée par ".$topic->getUser()."<br> 
       Date :".$topic->getDateCrea() ?></p>
@@ -31,6 +27,22 @@ if(isset($topics)){
       <a style="color:blue" href="index.php?ctrl=forum&action=blockTopic&id=<?=$topic->getId()?>">Verrouiller le topic</a>
       <a style="color:green" href="index.php?ctrl=forum&action=unBlockTopic&id=<?=$topic->getId()?>">Déverrouiller le topic</a>
 
+      <?php
+      }else{
+        ?>
+        <a href="index.php?ctrl=forum&action=listPosts&id=<?=$topic->getId() ;?>">
+      <p><?=$topic->getTitle()." "."<i class='fa fa-unlock-alt'></i></a><br>
+      text: ".$topic->gettext()."<br>
+      Crée par ".$topic->getUser()."<br> 
+      Date :".$topic->getDateCrea() ?></p>
+      <a style="color:red" href="index.php?ctrl=forum&action=deleteTopic&id=<?=$topic->getId()?>">Supprimer le topic</a>
+      <a style="color:blue" href="index.php?ctrl=forum&action=blockTopic&id=<?=$topic->getId()?>">Verrouiller le topic</a>
+      <a style="color:green" href="index.php?ctrl=forum&action=unBlockTopic&id=<?=$topic->getId()?>">Déverrouiller le topic</a>
+    <?php  
+    } 
+  }
+}
+?>
 
 
 <form method="POST" action="index.php?ctrl=forum&action=addTopic&id=<?= $_GET['id']?>">
@@ -42,9 +54,3 @@ if(isset($topics)){
   <br>
   <input type="submit" name="submit" >
 </form>
-
-      <?php
-     // }
-  }
-}
-?>
