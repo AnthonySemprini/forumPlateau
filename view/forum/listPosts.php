@@ -38,8 +38,8 @@ If($locker == 1){
 }else{
 ?>
 <form method="POST" action="index.php?ctrl=forum&action=addPost&id=<?= $_GET['id']?>">
-<button style="color:red" >Topic verrouiller</button>
+<p style="border-radius:8px; font-size:25px;color:White ;  text-align:center ; Width:220px ; Height:30px ; background-color:red" >Topic verrouiller !!!</p>
 </form>
 <?php
-}
+} 
 ?>
