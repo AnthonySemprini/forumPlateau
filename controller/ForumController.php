@@ -38,14 +38,20 @@ class ForumController extends AbstractController implements ControllerInterface{
     public function listTopics($id){
         $topicManager = new TopicManager();
         
+        
+        // var_dump();die;
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
             "data" => [
                 
                 "topics" => $topicManager->findTopicByCategory($id),
+               
+                // "total" => $postManager->countPostPerTopic($id),
                 //"categorys" => $categoryManager->findAll(['title', "ASC"])
                 ]];
     }
+
+    
 
     public function addTopic($id){ 
         $topicManager = new TopicManager();
@@ -79,9 +85,7 @@ class ForumController extends AbstractController implements ControllerInterface{
             }
         }
     }
-    public function block(){
-    
-    }
+   
 
     public function deleteTopic($id){
         $topicManager = new TopicManager();

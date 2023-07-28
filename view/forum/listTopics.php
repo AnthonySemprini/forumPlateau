@@ -2,6 +2,9 @@
 
 $topics = $result["data"]['topics'];
 
+
+//var_dump($post);die;
+
 //var_dump($topics);die;
 if(isset($topics)){
   ?>
@@ -12,13 +15,15 @@ if(isset($topics)){
     
   foreach($topics as $topic ){
     $locker = ($topic->getlocked());
+   
     //var_dump($locker);die;
 
       if($locker == 0){
       
 
             ?>
-      <a href="index.php?ctrl=forum&action=listPosts&id=<?=$topic->getId() ;?>">
+
+<a href="index.php?ctrl=forum&action=listPosts&id=<?=$topic->getId() ;?>">
       <p><?=$topic->getTitle()." "."<i class='fa fa-lock'></i></a><br>
       text: ".$topic->gettext()."<br>
       Crée par ".$topic->getUser()."<br> 
@@ -38,6 +43,7 @@ if(isset($topics)){
       <a style="color:red" href="index.php?ctrl=forum&action=deleteTopic&id=<?=$topic->getId()?>">Supprimer le topic</a>
       <a style="color:blue" href="index.php?ctrl=forum&action=blockTopic&id=<?=$topic->getId()?>">Verrouiller le topic</a>
       <a style="color:green" href="index.php?ctrl=forum&action=unBlockTopic&id=<?=$topic->getId()?>">Déverrouiller le topic</a>
+      
     <?php  
     } 
   }

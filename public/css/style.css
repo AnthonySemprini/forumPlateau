@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.container{
+    height: 1000vh;
+}
+h1{
+    text-align: center;
+    text-decoration: underline;
+}
+a{
+    text-decoration: none;
+    color: blue;
+}
+{
+    display: flex;
+    align-items: flex-end;
+    
+}
+/***********  Layout  **********/
+
+.navBar{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: antiquewhite;
+    height: 50px;
+}
+
+
+/***********   Liste des categ   ***********/
+
+.liste-categ{
+   
+    display: flex;
+    flex-direction: column;
+}
+.liste-categ a{
+    display: flex;
+    justify-content: center;
+}
+/***********   HOME   **********/
+
+.bienvenue{
+    font-size:x-large;
+    text-align: center;
+}

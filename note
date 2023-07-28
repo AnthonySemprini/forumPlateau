@@ -9,3 +9,25 @@
     }
     ?>
 </select> -->
+
+public function countPost($id){
+        $postManager = new PostManager();
+        return [
+            "view" =>VIEW_DIR."forum/listTopics.php",
+        "data" =>[
+             "posts" => $postManager->countPostPerTopic($id),
+        ]
+        ];
+    }
+
+    public function countPostPerTopic($id){
+        $sql = "SELECT COUNT(topic_id)
+                FROM post
+                WHERE topic_id = :id";
+
+            return $this->getMultipleResults(
+                DAO::select($sql,[
+                    'id'=>$id
+                ]),
+            $this->className);
+    }

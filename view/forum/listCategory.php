@@ -5,7 +5,8 @@ $categorys = $result["data"]['categorys'];
 ?>
 
 <h1>Liste des categorie</h1>
-<div>
+<div class="liste-categ" >
+    
 <?php
 foreach($categorys as $category ){
    // var_dump($category->getId());die;
@@ -15,4 +16,5 @@ foreach($categorys as $category ){
     <?php
 }
 ?>
+
 </div>  

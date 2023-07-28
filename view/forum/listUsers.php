@@ -5,7 +5,7 @@ $users = $result["data"]['user'];
 if(isset($users)){   
   ?>
 
-<h1>Liste des users</h1>
+<h1 class="User">Liste des users</h1>
 
 <?php
 foreach($users as $user ){
