@@ -10,6 +10,7 @@ if(isset($posts)){
 
 <?php
 foreach($posts as $post ){
+  
   ?>
   <p><?=htmlspecialchars_decode($post->gettext())?><br></p>
   <p>Poster par : <?= $post->getUser()?></p><br>
@@ -17,13 +18,28 @@ foreach($posts as $post ){
   <a style="color:red" href="index.php?ctrl=forum&action=deletePost&id=<?=$post->getId()?>">Supprimer le post</a>
   <?php
 }
-}else{
+  }else{
   
   echo "Post vide";
 }
+
+// $IdPost = $post->getId();
+$locker = $post->getTopic()->getlocked();
+
+// var_dump($idTopic);die;
+If($locker == 1){
 ?>
 
 <form method="POST" action="index.php?ctrl=forum&action=addPost&id=<?= $_GET['id']?>">
 <input class="post" name="text" >
 <input name="submit" type="submit">
 </form>
+<?php
+}else{
+?>
+<form method="POST" action="index.php?ctrl=forum&action=addPost&id=<?= $_GET['id']?>">
+<button style="color:red" >Topic verrouiller</button>
+</form>
+<?php
+}
+?>

@@ -3,7 +3,7 @@
     
     use App\Manager;
     use App\DAO;
-    
+
 
     class TopicManager extends Manager{
 
@@ -29,4 +29,24 @@
             );
         }
 
+        public function block($id){
+            $sql = "UPDATE $this->tableName
+                SET locked = 0
+                Where id_topic = :id";
+            
+                return $this->getOneOrNullResult(
+                    DAO::update($sql,['id'=>$id]),
+                    $this->className
+                );
+        }
+        public function unBlock($id){
+            $sql = "UPDATE $this->tableName
+                SET locked = 1
+                Where id_topic = :id";
+            
+                return $this->getOneOrNullResult(
+                    DAO::update($sql,['id'=>$id]),
+                    $this->className
+                );
+        }
     }

@@ -14,16 +14,16 @@ class ForumController extends AbstractController implements ControllerInterface{
     
     public function index(){
         // var_dump("ok");die;
-      
-      
-     }
+    
+    
+    }
     //!----------------------------- CATEGORY ----------------------------------------------
-
+    
     public function listCategory(){
         $categoryManager = new CategoryManager();
-
+        
         // var_dump($categoryManager->findAll(['title', "ASC"])->current());die;
-
+        
         return [
             "view" => VIEW_DIR."forum/listCategory.php",
             "data" => [
@@ -37,7 +37,7 @@ class ForumController extends AbstractController implements ControllerInterface{
 
     public function listTopics($id){
         $topicManager = new TopicManager();
-          
+        
             return [
                 "view" => VIEW_DIR."forum/listTopics.php",
             "data" => [
@@ -46,8 +46,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 //"categorys" => $categoryManager->findAll(['title', "ASC"])
                 ]];
     }
-               
-                
+
     public function addTopic($id){ 
         $topicManager = new TopicManager();
         if($_SESSION['user']){
@@ -72,16 +71,21 @@ class ForumController extends AbstractController implements ControllerInterface{
                         "user_id"=>$_SESSION['user']->getId(),
                         "category_id"=>$id
                     ]);
-                }    
                 
+                
+                
+                }
+                $this->redirectTo("forum",'listTopics',$id);   
             }
-            $this->redirectTo("forum",'listTopics',$id);   
         }
     }
-                
+    public function block(){
+    
+    }
+
     public function deleteTopic($id){
         $topicManager = new TopicManager();
-       
+        
         $topic = $topicManager->findOneById($id);
         if(Session::isAdmin() OR $topicManager->findOneById($id)->getUser() == Session::getUser()){   //? autorise a suppr l'admin et le createur du post
             $topicManager->delete($id);
@@ -89,6 +93,36 @@ class ForumController extends AbstractController implements ControllerInterface{
             $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
         }else{
             Session::addFlash("error","Impossible de supprime le topic");                //? envoi message erreur si suppr et refuse au user
+            $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
+            
+        }
+        
+    }
+    public function blockTopic($id){
+        $topicManager = new TopicManager();
+        
+        $topic = $topicManager->findOneById($id);
+        if(Session::isAdmin() OR $topicManager->findOneById($id)->getUser() == Session::getUser()){   //? autorise a suppr l'admin et le createur du post
+            $topicManager->block($id);
+            Session::addFlash("success","vous avez verrouiller le topic avec succès");    //? affiche vous avez suppr
+            $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
+        }else{
+            Session::addFlash("error","Impossible de verrouiller le topic");                //? envoi message erreur si suppr et refuse au user
+            $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
+            
+        }
+        
+    }
+    public function unBlockTopic($id){
+        $topicManager = new TopicManager();
+        
+        $topic = $topicManager->findOneById($id);
+        if(Session::isAdmin() OR $topicManager->findOneById($id)->getUser() == Session::getUser()){   //? autorise a suppr l'admin et le createur du post
+            $topicManager->unBlock($id);
+            Session::addFlash("success","vous avez deverrouiller le topic avec succès");    //? affiche vous avez suppr
+            $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
+        }else{
+            Session::addFlash("error","Impossible de deverrouiller le topic");                //? envoi message erreur si suppr et refuse au user
             $this->redirectTo("forum","listtopics",$topic->getCategory()->getId());     //? redirige vers la list de post du topic en question
             
         }
@@ -136,7 +170,7 @@ class ForumController extends AbstractController implements ControllerInterface{
         
         public function deletePost($id){
             $postManager = new PostManager();
-           
+            
             $post = $postManager->findOneById($id);
             if(Session::isAdmin() OR $postManager->findOneById($id)->getUser() == Session::getUser() ){   //? autorise a suppr l'admin et le createur du post
                 $postManager->delete($id);
@@ -160,7 +194,7 @@ class ForumController extends AbstractController implements ControllerInterface{
                 ]
             ];
     }
-   
+    
     public function listUsers($id){
         $userManager = new UserManager();
         return [

@@ -93,7 +93,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
                     }
                 }else{
                     $this->redirectTo("security","login");
-               }
+                }
         }
             
         
@@ -110,11 +110,11 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $this->redirectTo("view","home");
         }
 
- //!--------------------------------- USER & PROFIL ------------------------------------------------
+    //!--------------------------------- USER & PROFIL ------------------------------------------------
 
         public function deleteUser($id){
             $userManager = new UserManager();
-           
+            
             if(Session::isAdmin()){
                 $userManager->delete($id);
                 Session::addFlash("success","vous avez supprimer l'user avec succès");
@@ -124,9 +124,6 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
         public function profil(){
             $this->redirectTo("security","profil");
-
+        
         }
-       
-            
-       
 }
