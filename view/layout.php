@@ -26,12 +26,12 @@
                     <div id="nav-left class="navLeft">
                         <a href="index.php?home">Accueil</a>
                         <span>&nbsp;-&nbsp;</span>
-                        <a href="index.php?ctrl=forum&action=listCategory">Liste des categorie</a>
+                        <a href="index.php?ctrl=forum&action=listCategory">Categorie</a>
                         <?php
                         if(App\Session::isAdmin()){
                             ?>
                                <span>&nbsp;-&nbsp;</span>
-                            <a href="index.php?ctrl=forum&action=listUsers">Voir la liste des gens</a>
+                            <a href="index.php?ctrl=forum&action=listUsers">User</a>
                           
                             <?php
                         }

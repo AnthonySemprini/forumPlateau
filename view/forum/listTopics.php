@@ -8,7 +8,7 @@ $topics = $result["data"]['topics'];
 //var_dump($topics);die;
 if(isset($topics)){
   ?>
-
+<div class="topic">
   <h1>Liste des topics </h1>
 
   <?php
@@ -60,3 +60,4 @@ if(isset($topics)){
   <br>
   <input type="submit" name="submit" >
 </form>
+</div>

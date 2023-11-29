@@ -1,10 +1,15 @@
-<h1>BIENVENUE SUR LE FORUM</h1>
+<div class="home">
+    
+        <h1>WORLD FORUM</h1>
+        <?php
+        if (isset($_SESSION['user'])) {
+            //var_dump($_SESSION['user']."");die;
+            echo "<p class='bienvenue'>Bienvenue " . $_SESSION['user'] . "" . "</p>";
+        }
+        ?>
+        <img class="world" src="public/img/world.png" alt="">
 
-<?php
-if(isset($_SESSION['user'])) {
-    //var_dump($_SESSION['user']."");die;
-    echo "<p class='bienvenue'>Bienvenue ".$_SESSION['user'].""."</p>";
-}
- ?>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ut nemo quia voluptas numquam, itaque ipsa soluta ratione eum temporibus aliquid, facere rerum in laborum debitis labore aliquam ullam cumque.</p>
-
+        <p>Ici, vous pouvez partager vos expériences, poser des questions et discuter avec une communauté dynamique
+            partageant les mêmes intérêts. N'oubliez pas de lire nos règles avant de publier. Bonne navigation et
+            excellentes discussions !"</p>
+    </div>
